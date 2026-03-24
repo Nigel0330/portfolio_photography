@@ -1,17 +1,36 @@
 const menuBtn = document.getElementById("menu-btn");
 const navLinks = document.getElementById("nav-links");
 const menuBtnIcon = menuBtn.querySelector("i");
+const navEl = menuBtn.closest("nav");
 
 menuBtn.addEventListener("click", (e) => {
-  navLinks.classList.toggle("open");
-
   const isOpen = navLinks.classList.contains("open");
-  menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+
+  if (!isOpen) {
+    navLinks.style.display = "flex";
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        navLinks.classList.add("open");
+      });
+    });
+  } else {
+    navLinks.classList.remove("open");
+    setTimeout(() => {
+      navLinks.style.display = "none";
+    }, 300);
+  }
+
+  menuBtnIcon.setAttribute("class", !isOpen ? "ri-close-line" : "ri-menu-line");
+  navEl.classList.toggle("menu-open", !isOpen);
 });
 
 navLinks.addEventListener("click", (e) => {
   navLinks.classList.remove("open");
   menuBtnIcon.setAttribute("class", "ri-menu-line");
+  navEl.classList.remove("menu-open");
+  setTimeout(() => {
+    navLinks.style.display = "none";
+  }, 300);
 });
 
 const scrollRevealOption = {
@@ -90,10 +109,10 @@ const portfolioImages = {
   maternity: [
     { src: "images/maternity1.jpg", alt: "Maternity" },
     { src: "images/maternity2.jpg", alt: "Maternity" },
-    { src: "images/maternity3.jpg",  alt: "Maternity" },
-    { src: "images/maternity4.jpg",    alt: "Maternity" },
-    { src: "images/maternity5.jpg",    alt: "Maternity" },
-    { src: "images/maternity6.jpg",    alt: "Maternity" },
+    { src: "images/maternity3.jpg", alt: "Maternity" },
+    { src: "images/maternity4.jpg", alt: "Maternity" },
+    { src: "images/maternity5.jpg", alt: "Maternity" },
+    { src: "images/maternity6.jpg", alt: "Maternity" },
   ],
 };
 
