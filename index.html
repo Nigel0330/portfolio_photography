@@ -19,10 +19,9 @@
     <header class="header" id="home">
       <nav>
         <div class="nav__header">
-          <div class="nav__logo">
-            <a href="#">
-              <img src="images/logo.png" alt="logo" />
-            </a>
+          <div class="nav__header__left"></div>
+          <div class="nav__header__center">
+            <img src="images/logo.png" alt="logo" class="hero__logo" />
           </div>
           <div class="nav__menu__btn" id="menu-btn">
             <i class="ri-menu-line"></i>
@@ -49,6 +48,11 @@
           <a href="#service" class="btn hero__btn--primary">OUR SERVICES</a>
           <a href="#contact" class="btn hero__btn--outline">BOOK A SESSION</a>
         </div>
+      </div>
+      <div class="hero__scroll__arrow" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
     </header>
 
