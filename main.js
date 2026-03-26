@@ -169,3 +169,19 @@ const instagram2 = instagram.cloneNode(true);
 instagram2.classList.add("reverse");
 instagram2.removeAttribute("id");
 instagram.parentElement.appendChild(instagram2);
+
+// Hide hero logo when scrolled away from the hero section (mobile only)
+const heroLogo = document.querySelector(".hero__logo");
+
+function updateHeroLogoVisibility() {
+  // Hide once the user scrolls down even a little — the nav is fixed so
+  // the logo would otherwise float over every section below the hero.
+  if (window.scrollY > 10) {
+    heroLogo.classList.add("hero__logo--hidden");
+  } else {
+    heroLogo.classList.remove("hero__logo--hidden");
+  }
+}
+
+window.addEventListener("scroll", updateHeroLogoVisibility, { passive: true });
+updateHeroLogoVisibility();
