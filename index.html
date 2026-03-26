@@ -111,6 +111,17 @@
           <div class="portfolio__modal__grid" id="modalGrid"></div>
         </div>
       </div>
+
+      <!-- Lightbox -->
+      <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+        <button class="lightbox__close" id="lightboxClose" aria-label="Close"><i class="ri-close-line"></i></button>
+        <button class="lightbox__nav lightbox__prev" id="lightboxPrev" aria-label="Previous image"><i class="ri-arrow-left-s-line"></i></button>
+        <div class="lightbox__img__wrap">
+          <img class="lightbox__img" id="lightboxImg" src="" alt="Portfolio image" />
+        </div>
+        <button class="lightbox__nav lightbox__next" id="lightboxNext" aria-label="Next image"><i class="ri-arrow-right-s-line"></i></button>
+        <div class="lightbox__counter" id="lightboxCounter"></div>
+      </div>
     </div>
 
     <section class="service" id="service">
@@ -214,7 +225,7 @@
           <div class="footer__socials">
             <a href="https://www.facebook.com/profile.php?id=61578022088179&mibextid=wwXIfr&rdid=oE2h8rvq0wtZrDSM&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1LCFa4ezKU%2F%3Fmibextid%3DwwXIfr" target="_blank" rel="noopener noreferrer"><i class="ri-facebook-fill"></i></a>
             <a href="https://www.instagram.com/droldanphotography/?igsh=MWtjbXdhOW80d3ZiMw%3D%3D&utm_source=qr&fbclid=IwY2xjawQvbZNleHRuA2FlbQIxMABicmlkETFBMFFwR1hZSFg1dWw0Zmhrc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHhJ3lFYKO-KQ8-DqHkzhUhI3EiYmW3ACjMGvl3tSLDTWxXn2VoYJJJiyU8tL_aem_G9v7uF12mkE_s2_WirulYA" target="_blank" rel="noopener noreferrer"><i class="ri-instagram-line"></i></a>
-            <button class="footer__contact__btn" id="contactModalBtn" aria-label="Get in touch"><i class="ri-google-fill"></i></button>
+            <button class="footer__google__btn" id="googleContactBtn" aria-label="Get in Touch"><i class="ri-google-fill"></i></button>
           </div>
         </div>
         <div class="footer__col">
@@ -227,10 +238,10 @@
           </ul>
         </div>
         <div class="footer__col">
-          <h4>STAY IN TOUCH</h4>
-          <p>
-            Keep up-to-date with all things Capturer!
-          </p>
+          <button class="footer__contact__btn" id="footerContactBtn" aria-label="Contact Us">
+            <i class="ri-mail-send-line"></i>
+            <span>CONTACT US</span>
+          </button>
         </div>
       </div>
       <div class="footer__bar">
@@ -239,63 +250,47 @@
     </footer>
 
     <!-- Contact Modal -->
-    <div class="contact__modal" id="contactModal">
+    <div class="contact__modal" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
       <div class="contact__modal__box">
         <button class="contact__modal__close" id="contactModalClose" aria-label="Close">
           <i class="ri-close-line"></i>
         </button>
         <div class="contact__modal__left">
-          <h2>Get in Touch</h2>
-          <p class="contact__tagline">I'd like to hear from you!</p>
-          <p class="contact__desc">If you have any inquiries or just want to say hi, please use the contact form!</p>
-          <div class="contact__info">
+          <h2 class="contact__modal__heading" id="contactModalTitle">Get in Touch</h2>
+          <p class="contact__modal__tagline">I'd like to hear from you!</p>
+          <p class="contact__modal__desc">If you have any inquiries or just want to say hi, please use the contact form!</p>
+          <div class="contact__modal__info">
             <span><i class="ri-mail-line"></i> droldanphotography@gmail.com</span>
           </div>
-          <div class="contact__socials">
-            <a href="https://www.facebook.com/profile.php?id=61578022088179&mibextid=wwXIfr&rdid=oE2h8rvq0wtZrDSM&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1LCFa4ezKU%2F%3Fmibextid%3DwwXIfr" target="_blank" rel="noopener noreferrer"><i class="ri-facebook-fill"></i></a>
-            <a href="https://www.instagram.com/droldanphotography/?igsh=MWtjbXdhOW80d3ZiMw%3D%3D" target="_blank" rel="noopener noreferrer"><i class="ri-instagram-line"></i></a>
+        </div>
+        <form class="contact__modal__form" id="contactForm" novalidate>
+          <div class="contact__form__row">
+            <div class="contact__form__group">
+              <label for="contactFirstName">First Name</label>
+              <input type="text" id="contactFirstName" placeholder="First name" required />
+            </div>
+            <div class="contact__form__group">
+              <label for="contactLastName">Last Name</label>
+              <input type="text" id="contactLastName" placeholder="Last name" required />
+            </div>
           </div>
-        </div>
-        <div class="contact__modal__right">
-          <form class="contact__form" id="contactForm">
-            <div class="contact__form__row">
-              <div class="contact__form__group">
-                <label for="contactFirstName">First Name</label>
-                <input type="text" id="contactFirstName" placeholder="Jane" required />
-              </div>
-              <div class="contact__form__group">
-                <label for="contactLastName">Last Name</label>
-                <input type="text" id="contactLastName" placeholder="Doe" required />
-              </div>
-            </div>
-            <div class="contact__form__group">
-              <label for="contactEmail">Email <span>*</span></label>
-              <input type="email" id="contactEmail" placeholder="jane@email.com" required />
-            </div>
-            <div class="contact__form__group">
-              <label for="contactMessage">Message</label>
-              <textarea id="contactMessage" rows="4" placeholder="Write your message here..."></textarea>
-            </div>
-            <button type="submit" class="btn contact__submit">Send</button>
-            <p class="contact__success" id="contactSuccess">✓ Message sent! We'll get back to you soon.</p>
-          </form>
-        </div>
+          <div class="contact__form__group">
+            <label for="contactEmail">Email <span class="required">*</span></label>
+            <input type="email" id="contactEmail" placeholder="your@email.com" required />
+          </div>
+          <div class="contact__form__group">
+            <label for="contactMessage">Message</label>
+            <textarea id="contactMessage" rows="4" placeholder="Write your message here..."></textarea>
+          </div>
+          <button type="submit" class="btn contact__form__submit">Send</button>
+          <p class="contact__form__success" id="contactSuccess">✓ Message sent! We'll be in touch soon.</p>
+        </form>
       </div>
-    </div>
-
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-      <button class="lightbox__close" id="lightboxClose"><i class="ri-close-line"></i></button>
-      <button class="lightbox__nav lightbox__prev" id="lightboxPrev"><i class="ri-arrow-left-s-line"></i></button>
-      <div class="lightbox__img__wrap">
-        <img id="lightboxImg" src="" alt="" />
-      </div>
-      <button class="lightbox__nav lightbox__next" id="lightboxNext"><i class="ri-arrow-right-s-line"></i></button>
-      <span class="lightbox__count" id="lightboxCount"></span>
     </div>
 
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="main.js"></script>
   </body>
+</html>
 </html>
