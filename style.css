@@ -1097,7 +1097,247 @@ nav.menu-open {
   font-family: "Montserrat", sans-serif;
 }
 
-/* Also make portfolio grid images show a pointer cursor */
+/* Pointer cursor on portfolio grid images */
 .portfolio__modal__grid img {
-  cursor: zoom-in;
+  cursor: pointer;
+}
+
+/* ---------- Footer Google/Contact Button ---------- */
+.footer__contact__btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: color 0.3s;
+  padding: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+.footer__contact__btn:hover {
+  color: var(--text-light);
+}
+
+/* ---------- Contact Modal ---------- */
+.contact__modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  background-color: rgba(44, 31, 26, 0.7);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.contact__modal.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.contact__modal__box {
+  position: relative;
+  background-color: var(--color-lightest);
+  border-radius: 14px;
+  width: 100%;
+  max-width: 820px;
+  max-height: 92vh;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  transform: translateY(30px) scale(0.97);
+  transition: transform 0.35s ease, opacity 0.35s ease;
+  opacity: 0;
+}
+
+.contact__modal.open .contact__modal__box {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.contact__modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(44, 31, 26, 0.08);
+  border: none;
+  font-size: 1.5rem;
+  color: var(--color-dark);
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  z-index: 2;
+  line-height: 1;
+}
+
+.contact__modal__close:hover {
+  background: rgba(44, 31, 26, 0.15);
+  transform: rotate(90deg);
+}
+
+.contact__modal__left {
+  padding: 2.5rem 2rem 1.5rem;
+  border-bottom: 1px solid var(--color-light);
+}
+
+.contact__modal__left h2 {
+  font-family: var(--header-font);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--color-dark);
+  margin-bottom: 0.5rem;
+}
+
+.contact__tagline {
+  font-family: var(--header-font);
+  font-style: italic;
+  color: var(--color-dark);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.contact__desc {
+  color: var(--text-light);
+  line-height: 1.7;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  max-width: 340px;
+}
+
+.contact__info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-dark);
+  font-size: 0.9rem;
+  margin-bottom: 1.25rem;
+}
+
+.contact__info i {
+  font-size: 1.1rem;
+}
+
+.contact__socials {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.contact__socials a {
+  font-size: 1.4rem;
+  color: var(--text-dark);
+  transition: color 0.3s, transform 0.3s;
+}
+
+.contact__socials a:hover {
+  color: var(--color-dark);
+  transform: translateY(-2px);
+}
+
+.contact__modal__right {
+  padding: 2rem 2rem 2.5rem;
+}
+
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.contact__form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.contact__form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.contact__form__group label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  letter-spacing: 0.03em;
+}
+
+.contact__form__group label span {
+  color: var(--color-dark);
+}
+
+.contact__form__group input,
+.contact__form__group textarea {
+  padding: 0.65rem 0.9rem;
+  border: 1.5px solid var(--color-light);
+  border-radius: 6px;
+  background-color: #ffffff;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  resize: vertical;
+}
+
+.contact__form__group input:focus,
+.contact__form__group textarea:focus {
+  border-color: var(--color-dark);
+  box-shadow: 0 0 0 3px rgba(107, 61, 53, 0.1);
+}
+
+.contact__submit {
+  align-self: flex-end;
+  background-color: var(--color-dark);
+  color: #ffffff;
+  padding: 0.7rem 2rem;
+  font-size: 0.95rem;
+}
+
+.contact__submit:hover {
+  background-color: var(--color-darkest);
+}
+
+.contact__success {
+  font-size: 0.88rem;
+  color: var(--color-dark);
+  font-weight: 600;
+  text-align: right;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  min-height: 1.2em;
+}
+
+.contact__success.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (width > 600px) {
+  .contact__modal__box {
+    grid-template-columns: 1fr 1.3fr;
+  }
+
+  .contact__modal__left {
+    border-bottom: none;
+    border-right: 1px solid var(--color-light);
+    padding: 3rem 2rem;
+  }
+
+  .contact__modal__right {
+    padding: 3rem 2rem;
+  }
 }

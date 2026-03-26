@@ -214,7 +214,7 @@
           <div class="footer__socials">
             <a href="https://www.facebook.com/profile.php?id=61578022088179&mibextid=wwXIfr&rdid=oE2h8rvq0wtZrDSM&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1LCFa4ezKU%2F%3Fmibextid%3DwwXIfr" target="_blank" rel="noopener noreferrer"><i class="ri-facebook-fill"></i></a>
             <a href="https://www.instagram.com/droldanphotography/?igsh=MWtjbXdhOW80d3ZiMw%3D%3D&utm_source=qr&fbclid=IwY2xjawQvbZNleHRuA2FlbQIxMABicmlkETFBMFFwR1hZSFg1dWw0Zmhrc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHhJ3lFYKO-KQ8-DqHkzhUhI3EiYmW3ACjMGvl3tSLDTWxXn2VoYJJJiyU8tL_aem_G9v7uF12mkE_s2_WirulYA" target="_blank" rel="noopener noreferrer"><i class="ri-instagram-line"></i></a>
-            <a href="#" target="_blank" rel="noopener noreferrer"><i class="ri-google-fill"></i></a>
+            <button class="footer__contact__btn" id="contactModalBtn" aria-label="Get in touch"><i class="ri-google-fill"></i></button>
           </div>
         </div>
         <div class="footer__col">
@@ -237,6 +237,51 @@
         Copyright © 2024 Nigel Hernandez. All rights reserved.
       </div>
     </footer>
+
+    <!-- Contact Modal -->
+    <div class="contact__modal" id="contactModal">
+      <div class="contact__modal__box">
+        <button class="contact__modal__close" id="contactModalClose" aria-label="Close">
+          <i class="ri-close-line"></i>
+        </button>
+        <div class="contact__modal__left">
+          <h2>Get in Touch</h2>
+          <p class="contact__tagline">I'd like to hear from you!</p>
+          <p class="contact__desc">If you have any inquiries or just want to say hi, please use the contact form!</p>
+          <div class="contact__info">
+            <span><i class="ri-mail-line"></i> droldanphotography@gmail.com</span>
+          </div>
+          <div class="contact__socials">
+            <a href="https://www.facebook.com/profile.php?id=61578022088179&mibextid=wwXIfr&rdid=oE2h8rvq0wtZrDSM&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1LCFa4ezKU%2F%3Fmibextid%3DwwXIfr" target="_blank" rel="noopener noreferrer"><i class="ri-facebook-fill"></i></a>
+            <a href="https://www.instagram.com/droldanphotography/?igsh=MWtjbXdhOW80d3ZiMw%3D%3D" target="_blank" rel="noopener noreferrer"><i class="ri-instagram-line"></i></a>
+          </div>
+        </div>
+        <div class="contact__modal__right">
+          <form class="contact__form" id="contactForm">
+            <div class="contact__form__row">
+              <div class="contact__form__group">
+                <label for="contactFirstName">First Name</label>
+                <input type="text" id="contactFirstName" placeholder="Jane" required />
+              </div>
+              <div class="contact__form__group">
+                <label for="contactLastName">Last Name</label>
+                <input type="text" id="contactLastName" placeholder="Doe" required />
+              </div>
+            </div>
+            <div class="contact__form__group">
+              <label for="contactEmail">Email <span>*</span></label>
+              <input type="email" id="contactEmail" placeholder="jane@email.com" required />
+            </div>
+            <div class="contact__form__group">
+              <label for="contactMessage">Message</label>
+              <textarea id="contactMessage" rows="4" placeholder="Write your message here..."></textarea>
+            </div>
+            <button type="submit" class="btn contact__submit">Send</button>
+            <p class="contact__success" id="contactSuccess">✓ Message sent! We'll get back to you soon.</p>
+          </form>
+        </div>
+      </div>
+    </div>
 
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
