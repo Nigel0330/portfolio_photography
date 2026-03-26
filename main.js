@@ -121,13 +121,18 @@ const modalTitle = document.getElementById("modalTitle");
 const modalGrid  = document.getElementById("modalGrid");
 const modalClose = document.getElementById("modalClose");
 
+let currentImages = [];
+let currentIndex  = 0;
+
 function openModal(category, label) {
+  currentImages = portfolioImages[category];
   modalTitle.textContent = label;
   modalGrid.innerHTML = "";
-  portfolioImages[category].forEach(({ src, alt }) => {
+  currentImages.forEach(({ src, alt }, i) => {
     const img = document.createElement("img");
     img.src = src;
     img.alt = alt;
+    img.addEventListener("click", () => openLightbox(i));
     modalGrid.appendChild(img);
   });
   modal.classList.add("open");
@@ -151,9 +156,71 @@ modalClose.addEventListener("click", closeModal);
 modal.addEventListener("click", (e) => {
   if (e.target === modal) closeModal();
 });
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") closeModal();
+
+// ---------- Lightbox ----------
+const lightbox      = document.getElementById("lightbox");
+const lightboxImg   = document.getElementById("lightboxImg");
+const lightboxClose = document.getElementById("lightboxClose");
+const lightboxPrev  = document.getElementById("lightboxPrev");
+const lightboxNext  = document.getElementById("lightboxNext");
+const lightboxCount = document.getElementById("lightboxCount");
+
+function openLightbox(index) {
+  currentIndex = index;
+  showLightboxImage();
+  lightbox.classList.add("open");
+}
+
+function closeLightbox() {
+  lightbox.classList.remove("open");
+}
+
+function showLightboxImage() {
+  lightboxImg.classList.remove("lb-visible");
+  setTimeout(() => {
+    lightboxImg.src = currentImages[currentIndex].src;
+    lightboxImg.alt = currentImages[currentIndex].alt;
+    lightboxCount.textContent = `${currentIndex + 1} / ${currentImages.length}`;
+    lightboxImg.onload = () => lightboxImg.classList.add("lb-visible");
+    // If already cached, onload may not fire — force it
+    if (lightboxImg.complete) lightboxImg.classList.add("lb-visible");
+  }, 150);
+}
+
+lightboxClose.addEventListener("click", closeLightbox);
+lightboxPrev.addEventListener("click", () => {
+  currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+  showLightboxImage();
 });
+lightboxNext.addEventListener("click", () => {
+  currentIndex = (currentIndex + 1) % currentImages.length;
+  showLightboxImage();
+});
+lightbox.addEventListener("click", (e) => {
+  if (e.target === lightbox) closeLightbox();
+});
+
+document.addEventListener("keydown", (e) => {
+  if (lightbox.classList.contains("open")) {
+    if (e.key === "Escape")       closeLightbox();
+    if (e.key === "ArrowLeft")    { currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length; showLightboxImage(); }
+    if (e.key === "ArrowRight")   { currentIndex = (currentIndex + 1) % currentImages.length; showLightboxImage(); }
+  } else {
+    if (e.key === "Escape") closeModal();
+  }
+});
+
+// Touch swipe support for lightbox
+let lbTouchStartX = 0;
+lightbox.addEventListener("touchstart", (e) => { lbTouchStartX = e.touches[0].clientX; }, { passive: true });
+lightbox.addEventListener("touchend", (e) => {
+  const diff = lbTouchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) {
+    if (diff > 0) { currentIndex = (currentIndex + 1) % currentImages.length; }
+    else          { currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length; }
+    showLightboxImage();
+  }
+}, { passive: true });
 
 const instagram = document.querySelector(".instagram__flex");
 
