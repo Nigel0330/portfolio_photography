@@ -172,6 +172,24 @@ instagram2.classList.add("reverse");
 instagram2.removeAttribute("id");
 instagram.parentElement.appendChild(instagram2);
 
+// Simple image viewer — click any instagram photo to view it full size
+const igViewer = document.getElementById("igViewer");
+const igViewerImg = document.getElementById("igViewerImg");
+
+document.querySelector(".instagram__container").addEventListener("click", (e) => {
+  if (e.target.tagName === "IMG") {
+    igViewerImg.src = e.target.src;
+    igViewerImg.alt = e.target.alt;
+    igViewer.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+});
+
+igViewer.addEventListener("click", () => {
+  igViewer.classList.remove("open");
+  document.body.style.overflow = "";
+});
+
 // Contact Modal (Google icon)
 const googleContactBtn = document.getElementById("googleContactBtn");
 const contactModal = document.getElementById("contactModal");
