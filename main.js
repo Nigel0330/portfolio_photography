@@ -30,7 +30,6 @@ navLinks.addEventListener("click", (e) => {
   closeMenu();
 });
 
-// Reset menu state when resizing to desktop
 window.addEventListener("resize", () => {
   if (window.innerWidth >= 768) {
     closeMenu();
@@ -231,19 +230,15 @@ const contactSubmitBtn = contactForm.querySelector(".contact__form__submit");
 contactForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const firstName = document.getElementById("contactFirstName").value.trim();
-  const lastName  = document.getElementById("contactLastName").value.trim();
-  const email     = document.getElementById("contactEmail").value.trim();
-  const message   = document.getElementById("contactMessage").value.trim();
+  const email   = document.getElementById("contactEmail").value.trim();
+  const message = document.getElementById("contactMessage").value.trim();
 
   if (!email) return;
 
-  // Disable button while sending
   contactSubmitBtn.disabled = true;
   contactSubmitBtn.textContent = "Sending...";
 
   const templateParams = {
-    name:    firstName + (lastName ? " " + lastName : ""),
     email:   email,
     message: message || "(no message provided)",
     title:   "New Inquiry",
