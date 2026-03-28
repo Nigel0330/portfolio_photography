@@ -886,11 +886,12 @@ nav.menu-open {
   }
 
   .blog__container {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
 
   .blog__content {
-    grid-column: 2/3;
+    grid-column: 1;
+    text-align: center;
   }
 
   .footer__container {
