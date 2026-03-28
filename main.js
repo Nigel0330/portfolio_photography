@@ -3,34 +3,39 @@ const navLinks = document.getElementById("nav-links");
 const menuBtnIcon = menuBtn.querySelector("i");
 const navEl = menuBtn.closest("nav");
 
-menuBtn.addEventListener("click", (e) => {
-  const isOpen = navLinks.classList.contains("open");
-
-  if (!isOpen) {
-    navLinks.style.display = "flex";
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        navLinks.classList.add("open");
-      });
-    });
-  } else {
-    navLinks.classList.remove("open");
-    setTimeout(() => {
-      navLinks.style.display = "none";
-    }, 300);
-  }
-
-  menuBtnIcon.setAttribute("class", !isOpen ? "ri-close-line" : "ri-menu-line");
-  navEl.classList.toggle("menu-open", !isOpen);
-});
-
-navLinks.addEventListener("click", (e) => {
+function closeMenu() {
   navLinks.classList.remove("open");
   menuBtnIcon.setAttribute("class", "ri-menu-line");
   navEl.classList.remove("menu-open");
-  setTimeout(() => {
-    navLinks.style.display = "none";
-  }, 300);
+}
+
+function openMenu() {
+  navLinks.classList.add("open");
+  menuBtnIcon.setAttribute("class", "ri-close-line");
+  navEl.classList.add("menu-open");
+}
+
+menuBtn.addEventListener("click", () => {
+  if (navLinks.classList.contains("open")) {
+    closeMenu();
+  } else {
+    openMenu();
+  }
+});
+
+navLinks.addEventListener("click", (e) => {
+  const anchor = e.target.closest("a");
+  // Ignore clicks on the logo or anything that isn't a nav anchor
+  if (!anchor) return;
+  if (anchor.closest(".nav__logo")) return;
+  closeMenu();
+});
+
+// When resizing to desktop, reset menu state so CSS takes full control
+window.addEventListener("resize", () => {
+  if (window.innerWidth >= 768) {
+    closeMenu();
+  }
 });
 
 const scrollRevealOption = {
