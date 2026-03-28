@@ -25,13 +25,12 @@ menuBtn.addEventListener("click", () => {
 
 navLinks.addEventListener("click", (e) => {
   const anchor = e.target.closest("a");
-  // Ignore clicks on the logo or anything that isn't a nav anchor
   if (!anchor) return;
   if (anchor.closest(".nav__logo")) return;
   closeMenu();
 });
 
-// When resizing to desktop, reset menu state so CSS takes full control
+// Reset menu state when resizing to desktop
 window.addEventListener("resize", () => {
   if (window.innerWidth >= 768) {
     closeMenu();
@@ -224,14 +223,49 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeContactModal();
 });
 
+// EmailJS init
+emailjs.init("UR-MeEwNKdRYIVCCp");
+
+const contactSubmitBtn = contactForm.querySelector(".contact__form__submit");
+
 contactForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  contactSuccess.classList.add("visible");
-  contactForm.reset();
-  setTimeout(() => {
-    contactSuccess.classList.remove("visible");
-    closeContactModal();
-  }, 2500);
+
+  const firstName = document.getElementById("contactFirstName").value.trim();
+  const lastName  = document.getElementById("contactLastName").value.trim();
+  const email     = document.getElementById("contactEmail").value.trim();
+  const message   = document.getElementById("contactMessage").value.trim();
+
+  if (!email) return;
+
+  // Disable button while sending
+  contactSubmitBtn.disabled = true;
+  contactSubmitBtn.textContent = "Sending...";
+
+  const templateParams = {
+    name:    firstName + (lastName ? " " + lastName : ""),
+    email:   email,
+    message: message || "(no message provided)",
+    title:   "New Inquiry",
+  };
+
+  emailjs.send("service_79d4d2e", "template_ww551y7", templateParams)
+    .then(() => {
+      contactSuccess.classList.add("visible");
+      contactForm.reset();
+      setTimeout(() => {
+        contactSuccess.classList.remove("visible");
+        closeContactModal();
+      }, 2500);
+    })
+    .catch((err) => {
+      console.error("EmailJS error:", err);
+      alert("Something went wrong. Please try again or email us directly.");
+    })
+    .finally(() => {
+      contactSubmitBtn.disabled = false;
+      contactSubmitBtn.textContent = "Send";
+    });
 });
 
 // Lightbox
