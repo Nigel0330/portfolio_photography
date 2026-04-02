@@ -1428,18 +1428,18 @@ nav.menu-open {
   }
 }
 
-/* Mobile: always show portfolio overlay (no hover on touch devices) */
+/* Mobile: touch-activated portfolio overlay */
 @media (hover: none) {
-  .portfolio__content {
+  .portfolio__card.touched .portfolio__content {
     opacity: 1;
   }
 
-  .portfolio__label {
+  .portfolio__card.touched .portfolio__label {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .portfolio__content .btn {
+  .portfolio__card.touched .portfolio__content .btn {
     opacity: 1;
     transform: translateY(0);
   }

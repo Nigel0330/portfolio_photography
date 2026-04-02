@@ -193,6 +193,32 @@ igViewer.addEventListener("click", () => {
   document.body.style.overflow = "";
 });
 
+// Touch-based portfolio card overlay (mobile)
+if (window.matchMedia("(hover: none)").matches) {
+  const portfolioCards = document.querySelectorAll(".portfolio__card");
+
+  portfolioCards.forEach((card) => {
+    card.addEventListener("touchstart", (e) => {
+      const isAlreadyTouched = card.classList.contains("touched");
+
+      // If already revealed, let the button click go through naturally
+      if (isAlreadyTouched) return;
+
+      // First tap: reveal the overlay, prevent default link/button action
+      e.preventDefault();
+      portfolioCards.forEach((c) => c.classList.remove("touched"));
+      card.classList.add("touched");
+    }, { passive: false });
+  });
+
+  // Tap outside any card → hide all overlays
+  document.addEventListener("touchstart", (e) => {
+    if (!e.target.closest(".portfolio__card")) {
+      portfolioCards.forEach((c) => c.classList.remove("touched"));
+    }
+  });
+}
+
 // Contact Modal (Google icon)
 const googleContactBtn = document.getElementById("googleContactBtn");
 const contactModal = document.getElementById("contactModal");
