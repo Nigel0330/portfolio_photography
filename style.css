@@ -1427,3 +1427,20 @@ nav.menu-open {
     grid-template-columns: 1fr;
   }
 }
+
+/* Mobile: always show portfolio overlay (no hover on touch devices) */
+@media (hover: none) {
+  .portfolio__content {
+    opacity: 1;
+  }
+
+  .portfolio__label {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .portfolio__content .btn {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
